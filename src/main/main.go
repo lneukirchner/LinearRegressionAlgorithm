@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func matrixTransform2d(matrix [2][2]float64, vector [2]float64) [2]float64 {
 	var result [2]float64                                               //define result vector as a list with two items
@@ -36,17 +38,20 @@ func main() {
 	pointsList := [][]float64{{0, 0}, {1, 0.6}, {2, 3.5}, {4, 4}, {5, 7}}
 	var xSquaredTotal, xTotal, xyTotal, yTotal, oneTotal float64
 	var j int
+	var xValues, yValues []float64
 	for j = 0; j < len(pointsList); j++ {
 		xSquaredTotal += pointsList[j][0] * pointsList[j][0]
 		xTotal += pointsList[j][0]
 		xyTotal += pointsList[j][0] * pointsList[j][1]
 		yTotal += pointsList[j][1]
 		oneTotal += 1
+		xValues = append(xValues, pointsList[j][0])
+		yValues = append(yValues, pointsList[j][1])
 	}
 	firstMatrix := [2][2]float64{{xSquaredTotal, xTotal}, {xTotal, oneTotal}}
 	equalVector := [2]float64{xyTotal, yTotal}
 	var inverseFirstMatrix [2][2]float64 = inverseMatrix2d(firstMatrix)
 	var mbTerms [2]float64
 	mbTerms = matrixTransform2d(inverseFirstMatrix, equalVector)
-	fmt.Println(mbTerms)
+	fmt.Print("y = ", mbTerms[0], "x + (", mbTerms[1], ")")
 }
