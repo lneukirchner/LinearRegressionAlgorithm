@@ -28,7 +28,6 @@ func inverseMatrix2d(matrix [2][2]float64) [2][2]float64 {
 	newMatrix[1][1] = matrix[0][0]
 	newMatrix = constantTimesMatrix2d(inverseDeterminant, newMatrix)
 	return newMatrix
-
 }
 
 func main() {
